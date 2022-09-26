@@ -31,6 +31,13 @@ let alumnos = [
     },
 ]
 
+if (localStorage.alumnos == null) {
+    localStorage.setItem ("alumnos", JSON.stringify(alumnos));
+}
+
+alumnos = JSON.parse(localStorage.getItem("alumnos"));
+
+
 
 let estado = "";
 let nombreAlumno = prompt ("Ingrese su nombre completo");
@@ -38,6 +45,7 @@ let nota1 = parseInt(prompt("Ingrese su primera nota"));
 let nota2 = parseInt(prompt("Ingrese su segunda nota"));
 let nota3 = parseInt(prompt("Ingrese su tercera nota"));
 let promRound = calcularPromedio (nota1, nota2, nota3);
+
 
 
 if (promRound >= 40){
@@ -48,11 +56,15 @@ if (promRound >= 40){
     alert(`Su nota es: ${promRound} usted ha reprobado. Por favor asista al recuperatorio el dia 4/8`);
 }
 
+
 alumnos.push({
-    id: nombreAlumno,
+    id: alumnos.length + 1,
     estado: estado,
-    nota: promRound
+    nota: promRound,
+    nombre: nombreAlumno,
 });
+
+localStorage.setItem ("alumnos", JSON.stringify(alumnos));
 
 function calcularPromedio (){
     let promedio = (nota1 + nota2 + nota3) / 3;
@@ -84,11 +96,6 @@ function getNotaByName(e){
         }
     }
 }
-
-
-
-
-
 
 
 
