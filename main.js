@@ -31,6 +31,11 @@ let alumnos = [
     },
 ]
 
+function calcularPromedio (){
+    let promedio = (nota1 + nota2 + nota3) / 3;
+    return Math.round(promedio) ;
+}
+
 if (localStorage.alumnos == null) {
     localStorage.setItem ("alumnos", JSON.stringify(alumnos));
 }
@@ -38,53 +43,92 @@ if (localStorage.alumnos == null) {
 alumnos = JSON.parse(localStorage.getItem("alumnos"));
 
 
+const form = document.querySelector (".formulario")
 
-let estado = "";
-let nombreAlumno = prompt ("Ingrese su nombre completo");
-let nota1 = parseInt(prompt("Ingrese su primera nota"));
-let nota2 = parseInt(prompt("Ingrese su segunda nota"));
-let nota3 = parseInt(prompt("Ingrese su tercera nota"));
-let promRound = calcularPromedio (nota1, nota2, nota3);
+//Cuando haces click en submit se ejecuta todo el codigo de abajo. 
+// Este evento guarda los datos del alumno ingresado, saca su promedio y lo mete al local storage
+
+form.addEventListener(`submit`, (e)=>{
+    e.preventDefault()
+
+    let estado = "";
+    let nombreAlumno = e.target.nombreAlumno.value;
+    let nota1 =  parseInt(e.target.nota1.value);
+    let nota2 =  parseInt(e.target.nota2.value);
+    let nota3 =  parseInt(e.target.nota3.value);
+    let promRound =  (nota1+nota2+nota3 ) / 3 ;
+    
+    
+    if (nombreAlumno.length < 3)return Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: `No ha ingresado un nombre valido.`,
+        showConfirmButton: true,
+        })
+
+    if ((nota1 > 10 || nota2 > 10 || nota3 > 10 ))return Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: `Ha ingresado una nota mayor a 10.`,
+        showConfirmButton: true,
+        })
 
 
+    if (promRound >= 10){
+        estado = `Aprobado`;
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: `Su nota es: ${promRound} usted ha aprobado.`,
+            showConfirmButton: true,
+            })
+    }else{
+        estado = `Desaprobado`;
+        Swal.fire({
+            icon: 'error',
+            title: ':/',
+            text: `Su nota es: ${promRound} usted ha reprobado. Por favor asista al recuperatorio el dia 4/8`,
+            showConfirmButton: true,
+            });
+    }   
 
-if (promRound >= 40){
-    estado = `Aprobado`;
-    alert(`Su nota es: ${promRound} usted ha aprobado.`);
-}else{
-    estado = `Desaprobado`;
-    alert(`Su nota es: ${promRound} usted ha reprobado. Por favor asista al recuperatorio el dia 4/8`);
-}
+    alumnos.push({
+        id: alumnos.length + 1,
+        estado: estado,
+        nota: promRound,
+        nombre: nombreAlumno,
+    });
 
-
-alumnos.push({
-    id: alumnos.length + 1,
-    estado: estado,
-    nota: promRound,
-    nombre: nombreAlumno,
-});
-
-localStorage.setItem ("alumnos", JSON.stringify(alumnos));
-
-function calcularPromedio (){
-    let promedio = (nota1 + nota2 + nota3) / 3;
-    return Math.round(promedio) ;
-}
+    localStorage.setItem ("alumnos", JSON.stringify(alumnos));
+    
+})
 
 
 document.getElementById("btnObtenerNota").addEventListener("click", getNotaFromInput);
 
 
 function getNotaFromInput(e){
-    let nombre = document.getElementById("formularioAlumno").elements[`nombreAlumno`].value;
-    console.log(nombre)
+    let nombre = document.getElementById("formularioAlumno").elements[`nombreAlumno`].value.toLowerCase();
+
+    const alumnoDesconocido = alumnos.some((alumno)=>alumno.nombre.toLowerCase() == nombre);
+    console.log(!alumnoDesconocido)
+
+    if(!alumnoDesconocido)return Swal.fire({
+        icon: 'error',
+        title: '!',
+        text: `El estudiante ingresado no esta en la base de datos.`,
+        showConfirmButton: true,
+        });
+
     for (let index = 0; index < alumnos.length; index++) {
         const alumno = alumnos[index];
-        if(alumno.nombre == nombre ){
-            alert (`Su promedio es ${alumno.nota} Ha ${alumno.estado}`);
+        if(alumno.nombre.toLowerCase() == nombre ){
+            Swal.fire (`Su promedio es ${alumno.nota} Ha ${alumno.estado}`);
         }
     }
+    console.log(nombre)
 }
+
 
 
 function getNotaByName(e){
@@ -92,7 +136,7 @@ function getNotaByName(e){
     for (let index = 0; index < alumnos.length; index++) {
         const alumno = alumnos[index];
         if(alumno.nombre == nombre ){
-            alert (`Su promedio es ${alumno.nota} Ha ${alumno.estado}`);
+            Swal.fire (`Su promedio es ${alumno.nota} Ha ${alumno.estado}`);
         }
     }
 }

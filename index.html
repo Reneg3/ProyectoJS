@@ -13,23 +13,29 @@
 	
 	<link rel="stylesheet" href="css/demo.css" />
 	<link rel="stylesheet" href="css/templatemo-style.css">
-	
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 	<script type="text/javascript" src="js/modernizr.custom.86080.js"></script>
 		
 </head>
 
 <body>
-
-		<div id="particles-js"></div>
 		
-			<ul class="cb-slideshow">
-	            <li></li>
-	            <li></li>
-	            <li></li>
-	            <li></li>
-	            <li></li>
-	            <li></li>
-	        </ul>
+		<ul class="cb-slideshow">
+			<form  class="formulario">
+            
+                    <h5>Ingrese sus datos y notas</h5>
+                    <input class="controls" type="text"  id="nombreAlumno"   value="Nombre">
+
+                    <input class="controls" type="number"  id="nota1"   value="Nota 1"> 
+
+                    <input class="controls" type="number"  id="nota2"   value="Nota 2">   
+
+                    <input class="controls" type="number"  id="nota3"   value="Nota 3">
+
+                	<input class="boton" id="btnAlumno" type="submit" value="Enviar">
+            </form>
+		</ul>
 
 		<div class="container-fluid">
 			<div class="row cb-slideshow-text-container ">
@@ -45,7 +51,7 @@
 							<input name="email" type="text" class="form-control" id="emailAlumno" placeholder="Ingese su email" required/>
 						</div>
 						<div class="col-md-5 col-sm-5 col-xs-5">
-							<button type="submit" class="tm-btn-subscribe">Enviar</button>
+							<button type="button" onclick="getData()" class="tm-btn-subscribe">Enviar</button>
 						</div>
 						
 						</div>
@@ -66,8 +72,8 @@
 					
                     
 					<div class="tm-social-icons-container text-xs-center">
-	                	<a href="#" class="tm-social-link"><i class="fa fa-facebook"></i></a>
-	                    <a href="#" class="tm-social-link"><i class="fa fa-twitter"></i></a>
+	                	<a href="https://www.facebook.com/colegiosanpedroapostol/" class="tm-social-link"><i class="fa fa-facebook"></i></a>
+	                    <a href="https://www.instagram.com/colegiosanpedro_/?hl=es" class="tm-social-link"><i class="fa fa-twitter"></i></a>
 	                </div>
 
 					</div>
