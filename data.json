@@ -1,0 +1,20 @@
+{"maestros":[
+    {
+        "nombre":"Sebastian Wey",
+        "materia":"Matematicas"
+    },
+    {
+        "nombre":"Eva Perez",
+        "materia":"lengua"
+    },
+    {
+        "nombre":"Juana de Arco",
+        "materia":"Biologia"
+    },
+    {
+        "nombre":"Panam",
+        "materia":"Educacion Fisica"
+    }
+    
+]
+}

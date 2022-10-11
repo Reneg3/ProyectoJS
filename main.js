@@ -31,6 +31,7 @@ let alumnos = [
     },
 ]
 
+
 function calcularPromedio (){
     let promedio = (nota1 + nota2 + nota3) / 3;
     return Math.round(promedio) ;
@@ -140,6 +141,41 @@ function getNotaByName(e){
         }
     }
 }
+
+document.getElementById("subscribir").addEventListener("click", mostrarMaestro);
+
+function mostrarMaestro(){
+fetch('http://localhost:3000/maestros', {
+    method: "GET",
+    headers: {"Content-type": "application/json;charset=UTF-8"}
+})
+.then(response => response.json()) 
+.then(async(json) => {
+    await Swal.fire({
+        title: 'Seleccione al maestro',
+        input: 'select',
+        inputOptions:json.map(x=>{
+            let body = {};
+            body[x.materia] = x.nombre;
+            return body;
+        })
+        ,
+        inputPlaceholder: '',
+        showCancelButton: true,
+        inputValidator: (value) => {
+            return new Promise((resolve) => {
+            resolve(value)
+            
+        })
+        }
+    })
+})
+.catch(err => console.log(err))
+}
+
+
+
+
 
 
 

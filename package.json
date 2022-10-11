@@ -1,0 +1,22 @@
+{
+  "name": "desafio-comp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Reneg3/proyectojs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Reneg3/proyectojs/issues"
+  },
+  "homepage": "https://github.com/Reneg3/proyectojs#readme",
+  "dependencies": {
+    "sweetalert2": "^11.5.0"
+  }
+}
